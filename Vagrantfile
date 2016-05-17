@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
         app.vm.provider "virtualbox" do |vm|
             vm.memory = 256
             vm.cpus = 1
-            vm.name = "pins"
+            vm.name = "cron"
         end
 
         # build Docker images
