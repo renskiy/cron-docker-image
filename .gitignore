@@ -1,3 +1,6 @@
 # Jetbrains
 *.iml
 .idea/
+
+# Vagrant
+.vagrant/
