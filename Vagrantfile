@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
 
         # build Docker images
         app.vm.provision "docker" do |docker|
-            docker.build_image "/vagrant", args: "--tag=cron"
+            docker.build_image "/vagrant", args: "--tag=renskiy/cron"
         end
 
         # remove obsolete Docker images
