@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
 
         # remove obsolete Docker images
         app.vm.provision "shell",
-           inline: "docker images | sed 1d | grep '<none>' | awk '{print($3)}' | uniq | xargs docker rmi 2>/dev/null || true"
+           inline: "docker images | sed 1d | grep '<none>' | awk '{print($3)}' | xargs docker rmi 2>/dev/null || true"
 
         app.vm.provision "shell", inline: "echo 'Done!'"
 
