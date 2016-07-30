@@ -1,4 +1,4 @@
-# cron-docker
+# cron-docker-image
 
 Docker image to run cron inside the Docker container
 
