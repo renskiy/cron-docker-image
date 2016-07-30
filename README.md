@@ -43,7 +43,7 @@ docker run --detach --name cron renskiy/cron start-cron --user www-data \
 
 ## Environ variables
 
-Almost any environ variable you passed to the Docker will be visible to your cron scripts. With the exception for `$SHELL`, `$PATH`, `$PWD`, `$USER`, etc.
+Almost any environ variable you passed to the Docker will be visible to your cron scripts. With the exception of `$SHELL`, `$PATH`, `$PWD`, `$USER`, etc.
 
 ```bash
 docker run --tty --rm --interactive --env MY_VAR=foo renskiy/cron start-cron \
