@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+# make link to custom location of /etc/cron.d if provided
+if [ "${CRON_PATH}" ]; then
+    echo "CRON_PATH provided, creating link: /etc/cron.d -> ${CRON_PATH}"
+    ln -sf "${CRON_PATH}" /etc/cron.d
+fi
+
+# remove write permission for (g)roup and (o)ther (required by cron)
+chmod -R go-w /etc/cron.d
+
 # setting user for additional cron jobs
 case $1 in
 -u=*|--user=*)

@@ -49,3 +49,15 @@ Almost any environ variable you passed to the Docker will be visible to your cro
 docker run --tty --rm --interactive --env MY_VAR=foo renskiy/cron start-cron \
     "\* \* \* \* \* env >> /var/log/cron.log 2>&1"
 ```
+
+## Special Environ variables
+
+### `CRON_PATH`
+
+This Environ variable let you provide custom directory for your `cron.d` scripts which will placed instead of default `/etc/cron.d`:
+
+```bash
+docker run --detach --name cron --env CRON_PATH=/etc/my_app/cron.d renskiy/cron
+```
+
+This is very useful when you planning to create more then one Docker container from a single image.
