@@ -54,7 +54,7 @@ docker run --tty --rm --interactive --env MY_VAR=foo renskiy/cron start-cron \
 
 ### `CRON_PATH`
 
-This Environ variable let you provide custom directory for your `cron.d` scripts which will placed instead of default `/etc/cron.d`:
+This Environ variable let you provide custom directory for your `cron.d` scripts which will be placed instead of default `/etc/cron.d`:
 
 ```bash
 docker run --detach --name cron --env CRON_PATH=/etc/my_app/cron.d renskiy/cron
