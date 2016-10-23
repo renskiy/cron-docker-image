@@ -40,7 +40,7 @@ env | while read -r LINE; do  # read STDIN by line
     # split LINE by "="
     IFS="=" read VAR VAL <<< ${LINE}
     # remove existing definition of environment variable, ignoring exit code
-    sed --in-place "/^${VAR}/d" /etc/security/pam_env.conf || true
+    sed --in-place "/^${VAR}[[:blank:]=]/d" /etc/security/pam_env.conf || true
     # append new default value of environment variable
     echo "${VAR} DEFAULT=\"${VAL}\"" >> /etc/security/pam_env.conf
 done
