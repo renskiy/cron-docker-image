@@ -4,5 +4,7 @@
 
 Docker images to run `cron` inside the Docker container
 
-* [Debian-based](debian) (~170Mb)
-* [Alpine-based](alpine) (~8Mb)
+## Tags
+
+* [debian, latest](debian) (~170Mb)
+* [alpine](alpine) (~8Mb)
