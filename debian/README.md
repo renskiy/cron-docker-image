@@ -36,7 +36,7 @@ docker logs --follow cron
 Additionally you can pass any cron job by argument(s) using custom `start-cron` command at the moment of container creation (providing optional user with `-u`/`--user` option):
 
 ```bash
-docker run --detach --name cron renskiy/cron start-cron --user www-data \
+docker run --detach --name cron renskiy/cron:debian start-cron --user www-data \
     "0 1 \* \* \* echo '01:00 AM' >> /var/log/cron.log 2>&1" \
     "0 0 1 1 \* echo 'Happy New Year!!' >> /var/log/cron.log 2>&1"
 ```
@@ -46,7 +46,7 @@ docker run --detach --name cron renskiy/cron start-cron --user www-data \
 Almost any environ variable you passed to the Docker will be visible to your cron scripts. With the exception of `$SHELL`, `$PATH`, `$PWD`, `$USER`, etc.
 
 ```bash
-docker run --tty --rm --interactive --env MY_VAR=foo renskiy/cron start-cron \
+docker run --tty --rm --interactive --env MY_VAR=foo renskiy/cron:debian start-cron \
     "\* \* \* \* \* env >> /var/log/cron.log 2>&1"
 ```
 
@@ -57,7 +57,7 @@ docker run --tty --rm --interactive --env MY_VAR=foo renskiy/cron start-cron \
 This Environ variable let you provide custom directory for your `cron.d` scripts which will be placed instead of default `/etc/cron.d`:
 
 ```bash
-docker run --detach --name cron --env CRON_PATH=/etc/my_app/cron.d renskiy/cron
+docker run --detach --name cron --env CRON_PATH=/etc/my_app/cron.d renskiy/cron:debian
 ```
 
 This may be very useful when you create more then one Docker container from a single image with different cron jobs per container.
