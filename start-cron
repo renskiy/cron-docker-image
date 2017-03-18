@@ -12,11 +12,11 @@ chmod -R go-w /etc/cron.d
 # setting user for additional cron jobs
 case $1 in
 -u=*|--user=*)
-    CRONTAB_USER="-u ${1#*=}"
+    crontab_user="-u ${1#*=}"
     shift
     ;;
 -u|--user)
-    CRONTAB_USER="-u $2"
+    crontab_user="-u $2"
     shift 2
     ;;
 -*)
@@ -24,25 +24,25 @@ case $1 in
     exit 1
     ;;
 *)
-    CRONTAB_USER=""
+    crontab_user=""
     ;;
 esac
 
 # adding additional cron jobs passed by arguments
 # every job must be a single quoted string and have standard crontab format,
 # e.g.: start-cron --user user "0 \* \* \* \* env >> /var/log/cron.log 2>&1"
-{ for CRON_JOB in "$@"; do echo -e ${CRON_JOB}; done } \
+{ for cron_job in "$@"; do echo -e ${cron_job}; done } \
     | sed --regexp-extended 's/\\(.)/\1/g' \
-    | crontab ${CRONTAB_USER} -
+    | crontab ${crontab_user} -
 
 # update default values of PAM environment variables (used by CRON scripts)
-env | while read -r LINE; do  # read STDIN by line
+env | while read -r line; do  # read STDIN by line
     # split LINE by "="
-    IFS="=" read VAR VAL <<< ${LINE}
+    IFS="=" read var val <<< ${line}
     # remove existing definition of environment variable, ignoring exit code
-    sed --in-place "/^${VAR}[[:blank:]=]/d" /etc/security/pam_env.conf || true
+    sed --in-place "/^${var}[[:blank:]=]/d" /etc/security/pam_env.conf || true
     # append new default value of environment variable
-    echo "${VAR} DEFAULT=\"${VAL}\"" >> /etc/security/pam_env.conf
+    echo "${var} DEFAULT=\"${val}\"" >> /etc/security/pam_env.conf
 done
 
 # start cron
