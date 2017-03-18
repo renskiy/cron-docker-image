@@ -3,11 +3,11 @@
 # setting user for additional cron jobs
 case $1 in
 -u=*|--user=*)
-    crontab_user="${1#*=}"
+    crontab_user="-u ${1#*=}"
     shift
     ;;
 -u|--user)
-    crontab_user="$2"
+    crontab_user="-u $2"
     shift 2
     ;;
 -*)
@@ -15,7 +15,7 @@ case $1 in
     exit 1
     ;;
 *)
-    crontab_user="root"
+    crontab_user=""
     ;;
 esac
 
@@ -24,7 +24,7 @@ esac
 # e.g.: start-cron --user user "0 \* \* \* \* env >> /var/log/cron.log 2>&1"
 { for cron_job in "$@"; do echo -e ${cron_job}; done } \
     | sed --regexp-extended 's/\\(.)/\1/g' \
-    | crontab -u ${crontab_user} -
+    | crontab ${crontab_user} -
 
 # start cron
 default_crontabs_dir=/etc/crontabs
