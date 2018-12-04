@@ -2,8 +2,8 @@
 
 # make link to custom location of /etc/cron.d if provided
 if [ "${CRON_PATH}" ]; then
-    echo "CRON_PATH provided, creating link: /etc/cron.d -> ${CRON_PATH}"
-    ln -sf "${CRON_PATH}" /etc/cron.d
+    rm -rf /etc/cron.d
+    ln -sfTv "${CRON_PATH}" /etc/cron.d
 fi
 
 # remove write permission for (g)roup and (o)ther (required by cron)
